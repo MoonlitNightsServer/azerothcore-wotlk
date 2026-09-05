@@ -2306,9 +2306,25 @@ void AuraEffect::HandleAuraTransform(AuraApplication const* aurApp, uint8 mode, 
                                 case RACE_BLOODELF:
                                     target->SetDisplayId(target->getGender() == GENDER_MALE ? 17829 : 17830);
                                     break;
+                                // High Elf
+                                case RACE_HIGHELF:
+                                    target->SetDisplayId(target->getGender() == GENDER_MALE ? 17829 : 17830);
+                                    break;
                                 // Orc
                                 case RACE_ORC:
                                     target->SetDisplayId(target->getGender() == GENDER_MALE ? 10139 : 10140);
+                                    break;
+                                // Mag'har Orc
+                                case RACE_MAGHARORC:
+                                    target->SetDisplayId(target->getGender() == GENDER_MALE ? 10139 : 10140); // Orc ones
+                                    break;
+                                // Ogre
+                                case RACE_OGRE:
+                                    target->SetDisplayId(target->getGender() == GENDER_MALE ? 10139 : 10140); // Orc ones
+                                    break;
+                                // Goblin
+                                case RACE_GOBLIN:
+                                    target->SetDisplayId(target->getGender() == GENDER_MALE ? 10139 : 10140); // Orc ones
                                     break;
                                 // Troll
                                 case RACE_TROLL:
@@ -2338,6 +2354,10 @@ void AuraEffect::HandleAuraTransform(AuraApplication const* aurApp, uint8 mode, 
                                 case RACE_HUMAN:
                                     target->SetDisplayId(target->getGender() == GENDER_MALE ? 10137 : 10138);
                                     break;
+                                // Worgen
+                                case RACE_WORGEN:
+                                    target->SetDisplayId(target->getGender() == GENDER_MALE ? 10137 : 10138); // Human ones
+                                    break;
                                 // Night Elf
                                 case RACE_NIGHTELF:
                                     target->SetDisplayId(target->getGender() == GENDER_MALE ? 10143 : 10144);
@@ -2365,9 +2385,25 @@ void AuraEffect::HandleAuraTransform(AuraApplication const* aurApp, uint8 mode, 
                                 case RACE_BLOODELF:
                                     target->SetDisplayId(target->getGender() == GENDER_MALE ? 25032 : 25043);
                                     break;
+                                // High Elf
+                                case RACE_HIGHELF:
+                                    target->SetDisplayId(target->getGender() == GENDER_MALE ? 25032 : 25043);
+                                    break;
                                 // Orc
                                 case RACE_ORC:
                                     target->SetDisplayId(target->getGender() == GENDER_MALE ? 25039 : 25050);
+                                    break;
+                                // Mag'har Orc
+                                case RACE_MAGHARORC:
+                                    target->SetDisplayId(target->getGender() == GENDER_MALE ? 25039 : 25050); // Orc ones
+                                    break;
+                                // Ogre
+                                case RACE_OGRE:
+                                    target->SetDisplayId(target->getGender() == GENDER_MALE ? 25039 : 25050); // Orc ones
+                                    break;
+                                // Goblin
+                                case RACE_GOBLIN:
+                                    target->SetDisplayId(target->getGender() == GENDER_MALE ? 25039 : 25050); // Orc ones
                                     break;
                                 // Troll
                                 case RACE_TROLL:
@@ -2397,6 +2433,10 @@ void AuraEffect::HandleAuraTransform(AuraApplication const* aurApp, uint8 mode, 
                                 case RACE_HUMAN:
                                     target->SetDisplayId(target->getGender() == GENDER_MALE ? 25037 : 25048);
                                     break;
+                                // Worgen
+                                case RACE_WORGEN:
+                                    target->SetDisplayId(target->getGender() == GENDER_MALE ? 25037 : 25048); // Human ones
+                                    break;
                                 // Night Elf
                                 case RACE_NIGHTELF:
                                     target->SetDisplayId(target->getGender() == GENDER_MALE ? 25038 : 25049);
@@ -2421,12 +2461,15 @@ void AuraEffect::HandleAuraTransform(AuraApplication const* aurApp, uint8 mode, 
                             switch (target->GetDisplayRace())
                             {
                                 case DisplayRace::BloodElf:
+                                case DisplayRace::HighElf:
                                     if (urand(0, 1))
                                         target->SetDisplayId(target->getGender() == GENDER_MALE ? 21839 : 21838);
                                     else
                                         target->SetDisplayId(target->getGender() == GENDER_MALE ? 21841 : 21840);
                                     break;
                                 case DisplayRace::Orc:
+                                case DisplayRace::MagharOrc:
+                                case DisplayRace::Ogre:
                                     if (urand(0, 1))
                                         target->SetDisplayId(target->getGender() == GENDER_MALE ? 21867 : 21866);
                                     else
@@ -2469,6 +2512,7 @@ void AuraEffect::HandleAuraTransform(AuraApplication const* aurApp, uint8 mode, 
                                         target->SetDisplayId(target->getGender() == GENDER_MALE ? 21853 : 21852);
                                     break;
                                 case DisplayRace::Human:
+                                case DisplayRace::Worgen:
                                     if (urand(0, 1))
                                         target->SetDisplayId(target->getGender() == GENDER_MALE ? 21859 : 21858);
                                     else
@@ -2509,9 +2553,12 @@ void AuraEffect::HandleAuraTransform(AuraApplication const* aurApp, uint8 mode, 
                             switch (target->GetDisplayRace())
                             {
                                 case DisplayRace::BloodElf:
+                                case DisplayRace::HighElf:
                                     target->SetDisplayId(target->getGender() == GENDER_MALE ? 18793 : 18785);
                                     break;
                                 case DisplayRace::Orc:
+                                case DisplayRace::MagharOrc:
+                                case DisplayRace::Ogre:
                                     target->SetDisplayId(target->getGender() == GENDER_MALE ? 18805 : 18804);
                                     break;
                                 case DisplayRace::Troll:
@@ -2533,6 +2580,7 @@ void AuraEffect::HandleAuraTransform(AuraApplication const* aurApp, uint8 mode, 
                                     target->SetDisplayId(target->getGender() == GENDER_MALE ? 18799 : 18798);
                                     break;
                                 case DisplayRace::Human:
+                                case DisplayRace::Worgen:
                                     target->SetDisplayId(target->getGender() == GENDER_MALE ? 18801 : 18800);
                                     break;
                                 case DisplayRace::NightElf:
@@ -2551,9 +2599,12 @@ void AuraEffect::HandleAuraTransform(AuraApplication const* aurApp, uint8 mode, 
                             switch (target->GetDisplayRace())
                             {
                                 case DisplayRace::BloodElf:
+                                case DisplayRace::HighElf:
                                     target->SetDisplayId(target->getGender() == GENDER_MALE ? 19170 : 19169);
                                     break;
                                 case DisplayRace::Orc:
+                                case DisplayRace::MagharOrc:
+                                case DisplayRace::Ogre:
                                     target->SetDisplayId(target->getGender() == GENDER_MALE ? 19182 : 19181);
                                     break;
                                 case DisplayRace::Troll:
@@ -2575,6 +2626,7 @@ void AuraEffect::HandleAuraTransform(AuraApplication const* aurApp, uint8 mode, 
                                     target->SetDisplayId(target->getGender() == GENDER_MALE ? 19176 : 19175);
                                     break;
                                 case DisplayRace::Human:
+                                case DisplayRace::Worgen:
                                     target->SetDisplayId(target->getGender() == GENDER_MALE ? 19178 : 19177);
                                     break;
                                 case DisplayRace::NightElf:
@@ -2593,9 +2645,12 @@ void AuraEffect::HandleAuraTransform(AuraApplication const* aurApp, uint8 mode, 
                             switch (target->GetDisplayRace())
                             {
                                 case DisplayRace::BloodElf:
+                                case DisplayRace::HighElf:
                                     target->SetDisplayId(target->getGender() == GENDER_MALE ? 18841 : 18840);
                                     break;
                                 case DisplayRace::Orc:
+                                case DisplayRace::MagharOrc:
+                                case DisplayRace::Ogre:
                                     target->SetDisplayId(target->getGender() == GENDER_MALE ? 18870 : 18869);
                                     break;
                                 case DisplayRace::Troll:
@@ -2617,6 +2672,7 @@ void AuraEffect::HandleAuraTransform(AuraApplication const* aurApp, uint8 mode, 
                                     target->SetDisplayId(target->getGender() == GENDER_MALE ? 18847 : 18846);
                                     break;
                                 case DisplayRace::Human:
+                                case DisplayRace::Worgen:
                                     target->SetDisplayId(target->getGender() == GENDER_MALE ? 18860 : 18858);
                                     break;
                                 case DisplayRace::NightElf:
@@ -2635,9 +2691,12 @@ void AuraEffect::HandleAuraTransform(AuraApplication const* aurApp, uint8 mode, 
                             switch (target->GetDisplayRace())
                             {
                                 case DisplayRace::BloodElf:
+                                case DisplayRace::HighElf:
                                     target->SetDisplayId(target->getGender() == GENDER_MALE ? 22361 : 22360);
                                     break;
                                 case DisplayRace::Orc:
+                                case DisplayRace::MagharOrc:
+                                case DisplayRace::Ogre:
                                     target->SetDisplayId(target->getGender() == GENDER_MALE ? 22375 : 22374);
                                     break;
                                 case DisplayRace::Troll:
@@ -2659,6 +2718,7 @@ void AuraEffect::HandleAuraTransform(AuraApplication const* aurApp, uint8 mode, 
                                     target->SetDisplayId(target->getGender() == GENDER_MALE ? 22367 : 22366);
                                     break;
                                 case DisplayRace::Human:
+                                case DisplayRace::Worgen:
                                     target->SetDisplayId(target->getGender() == GENDER_MALE ? 22371 : 22370);
                                     break;
                                 case DisplayRace::NightElf:
@@ -2677,9 +2737,12 @@ void AuraEffect::HandleAuraTransform(AuraApplication const* aurApp, uint8 mode, 
                             switch (target->GetDisplayRace())
                             {
                                 case DisplayRace::BloodElf:
+                                case DisplayRace::HighElf:
                                     target->SetDisplayId(target->getGender() == GENDER_MALE ? 21086 : 21085);
                                     break;
                                 case DisplayRace::Orc:
+                                case DisplayRace::MagharOrc:
+                                case DisplayRace::Ogre:
                                     target->SetDisplayId(target->getGender() == GENDER_MALE ? 16438 : 16436);
                                     break;
                                 case DisplayRace::Troll:
@@ -2701,6 +2764,7 @@ void AuraEffect::HandleAuraTransform(AuraApplication const* aurApp, uint8 mode, 
                                     target->SetDisplayId(target->getGender() == GENDER_MALE ? 16448 : 16447);
                                     break;
                                 case DisplayRace::Human:
+                                case DisplayRace::Worgen:
                                     target->SetDisplayId(target->getGender() == GENDER_MALE ? 16433 : 16412);
                                     break;
                                 case DisplayRace::NightElf:
@@ -2719,9 +2783,12 @@ void AuraEffect::HandleAuraTransform(AuraApplication const* aurApp, uint8 mode, 
                             switch (target->GetDisplayRace())
                             {
                                 case DisplayRace::BloodElf:
+                                case DisplayRace::HighElf:
                                     target->SetDisplayId(target->getGender() == GENDER_MALE ? 24508 : 24519);
                                     break;
                                 case DisplayRace::Orc:
+                                case DisplayRace::MagharOrc:
+                                case DisplayRace::Ogre:
                                     target->SetDisplayId(target->getGender() == GENDER_MALE ? 24515 : 24526);
                                     break;
                                 case DisplayRace::Troll:
@@ -2743,6 +2810,7 @@ void AuraEffect::HandleAuraTransform(AuraApplication const* aurApp, uint8 mode, 
                                     target->SetDisplayId(target->getGender() == GENDER_MALE ? 24511 : 24522);
                                     break;
                                 case DisplayRace::Human:
+                                case DisplayRace::Worgen:
                                     target->SetDisplayId(target->getGender() == GENDER_MALE ? 24513 : 24524);
                                     break;
                                 case DisplayRace::NightElf:
@@ -2761,9 +2829,12 @@ void AuraEffect::HandleAuraTransform(AuraApplication const* aurApp, uint8 mode, 
                             switch (target->GetDisplayRace())
                             {
                                 case DisplayRace::BloodElf:
+                                case DisplayRace::HighElf:
                                     target->SetDisplayId(target->getGender() == GENDER_MALE ? 25032 : 25043);
                                     break;
                                 case DisplayRace::Orc:
+                                case DisplayRace::MagharOrc:
+                                case DisplayRace::Ogre:
                                     target->SetDisplayId(target->getGender() == GENDER_MALE ? 25039 : 25050);
                                     break;
                                 case DisplayRace::Troll:
@@ -2785,6 +2856,7 @@ void AuraEffect::HandleAuraTransform(AuraApplication const* aurApp, uint8 mode, 
                                     target->SetDisplayId(target->getGender() == GENDER_MALE ? 25035 : 25046);
                                     break;
                                 case DisplayRace::Human:
+                                case DisplayRace::Worgen:
                                     target->SetDisplayId(target->getGender() == GENDER_MALE ? 25037 : 25048);
                                     break;
                                 case DisplayRace::NightElf:
