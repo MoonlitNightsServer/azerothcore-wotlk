@@ -1,3 +1,9 @@
 [submodule "modules/mod-ale"]
 	path = modules/mod-ale
 	url = https://github.com/MoonlitNightsServer/mod-ale.git
+[submodule "modules/mod-worgoblin-high-elf"]
+	path = modules/mod-worgoblin-high-elf
+	url = https://github.com/MoonlitNightsServer/mod-worgoblin-high-elf.git
+[submodule "modules/mod-uac"]
+	path = modules/mod-uac
+	url = https://github.com/MoonlitNightsServer/mod-uac.git
