@@ -7,3 +7,6 @@
 [submodule "modules/mod-uac"]
 	path = modules/mod-uac
 	url = https://github.com/MoonlitNightsServer/mod-uac.git
+[submodule "modules/mod-classic-deathknight"]
+	path = modules/mod-classic-deathknight
+	url = https://github.com/MoonlitNightsServer/mod-classic-deathknight.git
