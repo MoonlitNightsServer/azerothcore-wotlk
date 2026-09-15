@@ -10,3 +10,6 @@
 [submodule "modules/mod-classic-deathknight"]
 	path = modules/mod-classic-deathknight
 	url = https://github.com/MoonlitNightsServer/mod-classic-deathknight.git
+[submodule "modules/mod-living-bomb"]
+	path = modules/mod-living-bomb
+	url = https://github.com/MoonlitNightsServer/mod-living-bomb.git
