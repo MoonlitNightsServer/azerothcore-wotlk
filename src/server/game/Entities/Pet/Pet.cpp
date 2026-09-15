@@ -2211,14 +2211,28 @@ void Pet::InitTalentForLevel()
 
 uint8 Pet::GetMaxTalentPointsForLevel(uint8 level)
 {
+    // Moonlit Nights: Rate.Talent.Pet scales the LEVEL-DERIVED points ONLY.
+    //
+    // Upstream applied the rate last, after SPELL_AURA_MOD_PET_TALENT_POINTS had
+    // already been folded in, so the rate silently rescaled flat aura bonuses.
+    // At Rate.Talent.Pet = 1.46 that made Beast Mastery (53270, +4) worth +5.84
+    // and took a level-60 pet from 16 to 21 rather than 20 -- measured in game
+    // 2026-09-15, 12/12 readings against the upstream formula. A flat +4 talent
+    // must be +4 at every level and at every rate.
     uint8 points = (level >= 20) ? ((level - 16) / 4) : 0;
+    points = uint8(points * sWorld->getRate(RATE_TALENT_PET));
+
     // Mod points from owner SPELL_AURA_MOD_PET_TALENT_POINTS
     if (Unit* owner = GetOwner())
         points += owner->GetTotalAuraModifier(SPELL_AURA_MOD_PET_TALENT_POINTS);
 
+    // Deliberately last: whatever a module writes into points is what is
+    // returned. Upstream ran this BEFORE the multiply, so a module's value was
+    // rescaled by the rate behind its back. No module in this fork implements
+    // the hook today, so this reordering changes no current behaviour.
     sScriptMgr->OnCalculateMaxTalentPointsForLevel(this, level, points);
 
-    return uint8(points * sWorld->getRate(RATE_TALENT_PET));
+    return points;
 }
 
 void Pet::ToggleAutocast(SpellInfo const* spellInfo, bool apply)
