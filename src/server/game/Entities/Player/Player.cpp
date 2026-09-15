@@ -14350,7 +14350,10 @@ void Player::LearnTalent(uint32 talentId, uint32 talentRank, bool command /*= fa
         }
 
         // xinef: we do not have enough talent points to add talent of this tier
-        if (spentPoints < (talentInfo->Row * MAX_TALENT_RANK))
+        // Moonlit Nights: PLAYER_TALENTS_PER_TIER, not MAX_TALENT_RANK. Upstream
+        // reuses the rank bound as the tier cost; splitting them lets the tier
+        // cost move without capping 5-rank talents. See DBCStructure.h.
+        if (spentPoints < (talentInfo->Row * PLAYER_TALENTS_PER_TIER))
             return;
     }
 

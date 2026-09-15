@@ -1919,6 +1919,21 @@ struct SummonPropertiesEntry
 #define MAX_PET_TALENT_RANK 3                               // use in calculations, expected <= MAX_TALENT_RANK
 #define MAX_TALENT_TABS 3
 
+// Moonlit Nights: points that must be spent in a tab to unlock its next row.
+//
+// Upstream reuses MAX_TALENT_RANK for this, which conflates two unrelated
+// things: the tier cost and the maximum rank a talent can have. Lowering
+// MAX_TALENT_RANK to change tier pacing would silently cap every 5-rank talent
+// at rank 4. MAX_PET_TALENT_RANK is the precedent -- it already serves as the
+// pet tier cost AND the pet rank bound, mirroring PET_TALENTS_PER_TIER client
+// side. This is the player equivalent, split out so the two roles are separate.
+//
+// MUST match PLAYER_TALENTS_PER_TIER in Interface\FrameXML\TalentFrameBase.lua
+// (shipped in Data\patch-A.mpq). The server is authoritative, but a mismatch
+// means the client greys buttons the server would accept, or offers buttons the
+// server refuses.
+#define PLAYER_TALENTS_PER_TIER 4
+
 struct TalentEntry
 {
     uint32    TalentID;                                     // 0
