@@ -13,3 +13,7 @@
 [submodule "modules/mod-living-bomb"]
 	path = modules/mod-living-bomb
 	url = https://github.com/MoonlitNightsServer/mod-living-bomb.git
+[submodule "modules/mod-atonement"]
+	path = modules/mod-atonement
+	url = https://github.com/MoonlitNightsServer/mod-atonement.git
+	branch = moonlit
