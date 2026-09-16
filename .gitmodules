@@ -1,18 +1,23 @@
 [submodule "modules/mod-ale"]
 	path = modules/mod-ale
 	url = https://github.com/MoonlitNightsServer/mod-ale.git
+	branch = moonlit
 [submodule "modules/mod-worgoblin-high-elf"]
 	path = modules/mod-worgoblin-high-elf
 	url = https://github.com/MoonlitNightsServer/mod-worgoblin-high-elf.git
+	branch = moonlit
 [submodule "modules/mod-uac"]
 	path = modules/mod-uac
 	url = https://github.com/MoonlitNightsServer/mod-uac.git
+	branch = moonlit
 [submodule "modules/mod-classic-deathknight"]
 	path = modules/mod-classic-deathknight
 	url = https://github.com/MoonlitNightsServer/mod-classic-deathknight.git
+	branch = moonlit
 [submodule "modules/mod-living-bomb"]
 	path = modules/mod-living-bomb
 	url = https://github.com/MoonlitNightsServer/mod-living-bomb.git
+	branch = moonlit
 [submodule "modules/mod-atonement"]
 	path = modules/mod-atonement
 	url = https://github.com/MoonlitNightsServer/mod-atonement.git
