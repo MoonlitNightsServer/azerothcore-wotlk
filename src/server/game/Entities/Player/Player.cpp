@@ -13602,16 +13602,21 @@ void Player::InitGlyphsForLevel()
     uint8 level = GetLevel();
     uint32 value = 0;
 
-    // 0x3F = 0x01 | 0x02 | 0x04 | 0x08 | 0x10 | 0x20 for 80 level
-    if (level >= 15)
-        value |= (0x01 | 0x02);
+    // Moonlit Nights: one socket every 10 levels, 10..60, in Blizzard's opening
+    // order (idx 0 Major, 1 Minor, 3 Major, 2 Minor, 4 Minor, 5 Major).
+    // Keep in step with the minLevel switch in Spell::EffectApplyGlyph.
+    // 0x3F = 0x01 | 0x02 | 0x04 | 0x08 | 0x10 | 0x20 at level 60
+    if (level >= 10)
+        value |= 0x01;
+    if (level >= 20)
+        value |= 0x02;
     if (level >= 30)
         value |= 0x08;
-    if (level >= 50)
+    if (level >= 40)
         value |= 0x04;
-    if (level >= 70)
+    if (level >= 50)
         value |= 0x10;
-    if (level >= 80)
+    if (level >= 60)
         value |= 0x20;
 
     SetUInt32Value(PLAYER_GLYPHS_ENABLED, value);
