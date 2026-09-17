@@ -30,3 +30,11 @@
 	path = modules/mod-moonlit-ammo
 	url = https://github.com/MoonlitNightsServer/mod-moonlit-ammo.git
 	branch = moonlit
+[submodule "modules/mod-moonlit-startmeup"]
+	path = modules/mod-moonlit-startmeup
+	url = https://github.com/MoonlitNightsServer/mod-moonlit-startmeup.git
+	branch = moonlit
+[submodule "modules/mod-talentbutton"]
+	path = modules/mod-talentbutton
+	url = https://github.com/MoonlitNightsServer/mod-talentbutton.git
+	branch = moonlit
