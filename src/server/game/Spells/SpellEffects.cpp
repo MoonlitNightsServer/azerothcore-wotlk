@@ -595,6 +595,11 @@ void Spell::EffectSchoolDMG(SpellEffIndex effIndex)
                                 dmg_max += caster->GetWeaponDamageRange(RANGED_ATTACK, MAXDAMAGE, i);
                             }
 
+                            // Moonlit Nights: thrown weapons count as 2.8 s weapons for shots
+                            float const thrownFactor = caster->GetThrownSpellWeaponFactor();
+                            dmg_min *= thrownFactor;
+                            dmg_max *= thrownFactor;
+
                             if (dmg_max == 0.0f && dmg_min > dmg_max)
                             {
                                 damage += int32(dmg_min);
@@ -3652,6 +3657,15 @@ void Spell::EffectWeaponDmg(SpellEffIndex effIndex)
         spell_bonus = int32(spell_bonus * weapon_total_pct);
     }
 
+    // Moonlit Nights: a thrown weapon counts as a 2.8 s weapon for weapon-damage
+    // spells. Attack power uses the normalised 2.8 (normalized = true) and the
+    // weapon's own damage roll is scaled by 2.8 / speed. Auto-attacks never come
+    // through here, so they keep the weapon's real speed and damage.
+    Player* thrownCaster = (m_attackType == RANGED_ATTACK) ? m_caster->ToPlayer() : nullptr;
+    float const thrownFactor = thrownCaster ? thrownCaster->GetThrownSpellWeaponFactor() : 1.0f;
+    if (thrownFactor > 1.0f)
+        normalized = true;
+
     int32 weaponDamage = 0;
     // Dancing Rune Weapon
     if (m_caster->GetEntry() == 27893)
@@ -3662,6 +3676,19 @@ void Spell::EffectWeaponDmg(SpellEffIndex effIndex)
     else
     {
         weaponDamage = m_caster->CalculateDamage(m_attackType, normalized, isPhysical);
+    }
+
+    if (thrownFactor > 1.0f)
+    {
+        // Add the missing (factor - 1) share of the weapon roll, with the same
+        // percentage modifiers CalculateMinMaxDamage applies to the weapon part.
+        int32 const weaponMin = int32(thrownCaster->GetWeaponDamageRange(RANGED_ATTACK, MINDAMAGE));
+        int32 const weaponMax = int32(thrownCaster->GetWeaponDamageRange(RANGED_ATTACK, MAXDAMAGE));
+        float pct = thrownCaster->GetPctModifierValue(UNIT_MOD_DAMAGE_RANGED, BASE_PCT);
+        if (isPhysical)
+            pct *= thrownCaster->GetPctModifierValue(UNIT_MOD_DAMAGE_RANGED, TOTAL_PCT);
+        int32 const roll = weaponMax > weaponMin ? irand(weaponMin, weaponMax) : weaponMin;
+        weaponDamage += int32(float(roll) * (thrownFactor - 1.0f) * pct);
     }
 
     // Sequence is important

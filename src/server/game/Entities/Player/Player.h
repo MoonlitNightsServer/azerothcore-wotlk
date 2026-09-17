@@ -1987,6 +1987,8 @@ public:
     void UpdateAllRatings();
 
     void CalculateMinMaxDamage(WeaponAttackType attType, bool normalized, bool addTotalPct, float& minDamage, float& maxDamage, uint8 damageIndex) override;
+    // Moonlit Nights: > 1.0 when a usable thrown weapon is faster than the 2.8 s ranged reference.
+    [[nodiscard]] float GetThrownSpellWeaponFactor() const;
 
     void UpdateDefenseBonusesMod();
     inline void RecalculateRating(CombatRating cr) { ApplyRatingMod(cr, 0, true);}
