@@ -13602,22 +13602,30 @@ void Player::InitGlyphsForLevel()
     uint8 level = GetLevel();
     uint32 value = 0;
 
-    // Moonlit Nights: one socket every 10 levels, 10..60, in Blizzard's opening
-    // order (idx 0 Major, 1 Minor, 3 Major, 2 Minor, 4 Minor, 5 Major).
-    // Keep in step with the minLevel switch in Spell::EffectApplyGlyph.
+    // Moonlit Nights (2026-09-17, rev 3): one socket every 10 levels, going
+    // CLOCKWISE round the glyph wheel from the top-right socket, so the types
+    // alternate minor/major:
+    //   10 top-right Minor (idx 4)   20 bottom-right Major (idx 3)
+    //   30 bottom Minor    (idx 1)   40 bottom-left  Major (idx 5)
+    //   50 top-left Minor  (idx 2)   60 top          Major (idx 0)
+    // Socket types come from GlyphSlot.dbc Order: idx 0/3/5 Major, 1/2/4 Minor;
+    // wheel positions from Blizzard_GlyphUI.xml (UI id = idx + 1).
+    // (The Prime socket at level 1 is virtual - mod-moonlit-primeglyph.)
+    // Keep in step with the minLevel switch in Spell::EffectApplyGlyph and with
+    // GLYPH_SLOT_TOOLTIP1..6 in the client's patch-A GlobalStrings.lua.
     // 0x3F = 0x01 | 0x02 | 0x04 | 0x08 | 0x10 | 0x20 at level 60
     if (level >= 10)
-        value |= 0x01;
+        value |= 0x10;  // idx 4 Minor, top-right
     if (level >= 20)
-        value |= 0x02;
+        value |= 0x08;  // idx 3 Major, bottom-right
     if (level >= 30)
-        value |= 0x08;
+        value |= 0x02;  // idx 1 Minor, bottom
     if (level >= 40)
-        value |= 0x04;
+        value |= 0x20;  // idx 5 Major, bottom-left
     if (level >= 50)
-        value |= 0x10;
+        value |= 0x04;  // idx 2 Minor, top-left
     if (level >= 60)
-        value |= 0x20;
+        value |= 0x01;  // idx 0 Major, top
 
     SetUInt32Value(PLAYER_GLYPHS_ENABLED, value);
 }

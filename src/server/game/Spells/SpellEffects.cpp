@@ -4340,26 +4340,27 @@ void Spell::EffectApplyGlyph(SpellEffIndex effIndex)
 
     // glyph sockets level requirement
     uint8 minLevel = 0;
-    // Moonlit Nights: keep in step with Player::InitGlyphsForLevel.
+    // Moonlit Nights: keep in step with Player::InitGlyphsForLevel (rev 3,
+    // clockwise from the top-right socket).
     switch (m_glyphIndex)
     {
-        case 0:
-            minLevel = 10;
+        case 0:                 // Major, top
+            minLevel = 60;
             break;
-        case 1:
-            minLevel = 20;
-            break;
-        case 2:
-            minLevel = 40;
-            break;
-        case 3:
+        case 1:                 // Minor, bottom
             minLevel = 30;
             break;
-        case 4:
+        case 2:                 // Minor, top-left
             minLevel = 50;
             break;
-        case 5:
-            minLevel = 60;
+        case 3:                 // Major, bottom-right
+            minLevel = 20;
+            break;
+        case 4:                 // Minor, top-right
+            minLevel = 10;
+            break;
+        case 5:                 // Major, bottom-left
+            minLevel = 40;
             break;
     }
     if (minLevel && m_caster->GetLevel() < minLevel)
