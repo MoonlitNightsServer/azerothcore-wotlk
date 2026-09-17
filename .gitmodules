@@ -22,3 +22,7 @@
 	path = modules/mod-atonement
 	url = https://github.com/MoonlitNightsServer/mod-atonement.git
 	branch = moonlit
+[submodule "modules/mod-talent-progression"]
+	path = modules/mod-talent-progression
+	url = https://github.com/MoonlitNightsServer/mod-talent-progression.git
+	branch = moonlit
