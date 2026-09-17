@@ -26,3 +26,7 @@
 	path = modules/mod-talent-progression
 	url = https://github.com/MoonlitNightsServer/mod-talent-progression.git
 	branch = moonlit
+[submodule "modules/mod-moonlit-ammo"]
+	path = modules/mod-moonlit-ammo
+	url = https://github.com/MoonlitNightsServer/mod-moonlit-ammo.git
+	branch = moonlit
