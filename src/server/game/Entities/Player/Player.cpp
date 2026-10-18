@@ -12295,12 +12295,16 @@ void Player::learnSkillRewardedSpells(uint32 skill_id, uint32 skill_value)
         // Check race if set
         if (pAbility->RaceMask && !(pAbility->RaceMask & raceMask))
         {
+            // Moonlit Nights 8.10: a spell this race/class may no longer have is unlearned, not left stuck
+            removeSpell(pAbility->Spell, GetActiveSpec(), true);
             continue;
         }
 
         // Check class if set
         if (pAbility->ClassMask && !(pAbility->ClassMask & classMask))
         {
+            // Moonlit Nights 8.10: a spell this race/class may no longer have is unlearned, not left stuck
+            removeSpell(pAbility->Spell, GetActiveSpec(), true);
             continue;
         }
 
