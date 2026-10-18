@@ -1,0 +1,4 @@
+[submodule "modules/mod-ale"]
+	path = modules/mod-ale
+	url = https://github.com/MoonlitNightsServer/mod-ale.git
+	branch = MoonlitNightsServer
