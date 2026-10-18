@@ -14,3 +14,7 @@
 	path = modules/mod-moonlit-races
 	url = https://github.com/MoonlitNightsServer/mod-moonlit-races.git
 	branch = MoonlitNightsServer
+[submodule "modules/mod-classic-deathknight"]
+	path = modules/mod-classic-deathknight
+	url = https://github.com/MoonlitNightsServer/mod-classic-deathknight.git
+	branch = MoonlitNightsServer
