@@ -18,3 +18,7 @@
 	path = modules/mod-classic-deathknight
 	url = https://github.com/MoonlitNightsServer/mod-classic-deathknight.git
 	branch = MoonlitNightsServer
+[submodule "modules/mod-learn-spells"]
+	path = modules/mod-learn-spells
+	url = https://github.com/MoonlitNightsServer/mod-learn-spells.git
+	branch = MoonlitNightsServer
