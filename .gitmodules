@@ -10,3 +10,7 @@
 	path = modules/mod-worgoblin-high-elf
 	url = https://github.com/MoonlitNightsServer/mod-worgoblin-high-elf.git
 	branch = MoonlitNightsServer
+[submodule "modules/mod-moonlit-races"]
+	path = modules/mod-moonlit-races
+	url = https://github.com/MoonlitNightsServer/mod-moonlit-races.git
+	branch = MoonlitNightsServer
