@@ -26,3 +26,7 @@
 	path = modules/mod-moonlit-blessings
 	url = https://github.com/MoonlitNightsServer/mod-moonlit-blessings.git
 	branch = MoonlitNightsServer
+[submodule "modules/mod-living-bomb"]
+	path = modules/mod-living-bomb
+	url = https://github.com/MoonlitNightsServer/mod-living-bomb.git
+	branch = MoonlitNightsServer
