@@ -541,6 +541,25 @@ void Player::UpdateShieldBlockValue()
     SetUInt32Value(PLAYER_SHIELD_BLOCK, GetShieldBlockValue());
 }
 
+// Moonlit Nights: thrown weapons are itemised as fast weapons, so their per-hit
+// damage is low for shots that read ranged weapon damage. Spells treat them as a
+// 2.8 s weapon: factor = 2.8 / listed speed (never below 1). The item's listed
+// Delay is used, not the hasted attack timer, so haste never inflates it.
+float Player::GetThrownSpellWeaponFactor() const
+{
+    static constexpr float RANGED_REFERENCE_DELAY = 2800.0f;
+
+    Item* weapon = GetWeaponForAttack(RANGED_ATTACK, true);
+    if (!weapon)
+        return 1.0f;
+
+    ItemTemplate const* proto = weapon->GetTemplate();
+    if (proto->Class != ITEM_CLASS_WEAPON || proto->SubClass != ITEM_SUBCLASS_WEAPON_THROWN || !proto->Delay)
+        return 1.0f;
+
+    return std::max(1.0f, RANGED_REFERENCE_DELAY / float(proto->Delay));
+}
+
 void Player::CalculateMinMaxDamage(WeaponAttackType attType, bool normalized, bool addTotalPct, float& minDamage, float& maxDamage, uint8 damageIndex)
 {
     // Only proto damage, not affected by any mods
