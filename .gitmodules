@@ -22,3 +22,7 @@
 	path = modules/mod-learn-spells
 	url = https://github.com/MoonlitNightsServer/mod-learn-spells.git
 	branch = MoonlitNightsServer
+[submodule "modules/mod-moonlit-blessings"]
+	path = modules/mod-moonlit-blessings
+	url = https://github.com/MoonlitNightsServer/mod-moonlit-blessings.git
+	branch = MoonlitNightsServer
