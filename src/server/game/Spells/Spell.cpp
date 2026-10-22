@@ -3616,7 +3616,7 @@ SpellCastResult Spell::prepare(SpellCastTargets const* targets, AuraEffect const
     }
 
     //Prevent casting at cast another spell (ServerSide check)
-    if (!HasTriggeredCastFlag(TRIGGERED_IGNORE_CAST_IN_PROGRESS) && unitCaster && unitCaster->IsNonMeleeSpellCast(false, true, true, m_spellInfo->Id == 75) && m_cast_count)
+    if (!HasTriggeredCastFlag(TRIGGERED_IGNORE_CAST_IN_PROGRESS) && unitCaster && unitCaster->IsNonMeleeSpellCast(false, true, true, IsAutoShotSpell(m_spellInfo->Id)) /* Moonlit Nights: Auto Shot clones too */ && m_cast_count)
     {
         SendCastResult(SPELL_FAILED_SPELL_IN_PROGRESS);
         finish(false);
@@ -3764,8 +3764,8 @@ SpellCastResult Spell::prepare(SpellCastTargets const* targets, AuraEffect const
                 exceptSpellId = m_spellInfo->Id;
             }
 
-            unitCaster->RemoveAurasWithInterruptFlags(AURA_INTERRUPT_FLAG_CAST, exceptSpellId, m_spellInfo->Id == 75);
-            unitCaster->RemoveAurasWithInterruptFlags(AURA_INTERRUPT_FLAG_SPELL_ATTACK, exceptSpellId, m_spellInfo->Id == 75);
+            unitCaster->RemoveAurasWithInterruptFlags(AURA_INTERRUPT_FLAG_CAST, exceptSpellId, IsAutoShotSpell(m_spellInfo->Id)); // Moonlit Nights: Auto Shot clones too
+            unitCaster->RemoveAurasWithInterruptFlags(AURA_INTERRUPT_FLAG_SPELL_ATTACK, exceptSpellId, IsAutoShotSpell(m_spellInfo->Id)); // Moonlit Nights: Auto Shot clones too
         }
 
         if (unitCaster)
@@ -6010,7 +6010,8 @@ SpellCastResult Spell::CheckCast(bool strict, uint32* /*param1*/, uint32* /*para
 
     // cancel autorepeat spells if cast start when moving
     // (not wand currently autorepeat cast delayed to moving stop anyway in spell update code)
-    if (unitCaster && unitCaster->IsPlayer() && unitCaster->ToPlayer()->isMoving() && !IsTriggered())
+    // Moonlit Nights: Auto Shot and its clones (Hurl) may be started while moving
+    if (unitCaster && unitCaster->IsPlayer() && unitCaster->ToPlayer()->isMoving() && !IsTriggered() && !IsAutoShotSpell(m_spellInfo->Id))
     {
         // skip stuck spell to allow use it in falling case and apply spell limitations at movement
         if ((!unitCaster->HasUnitMovementFlag(MOVEMENTFLAG_FALLING_FAR) || m_spellInfo->Effects[0].Effect != SPELL_EFFECT_STUCK) &&

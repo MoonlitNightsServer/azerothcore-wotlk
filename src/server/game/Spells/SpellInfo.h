@@ -336,6 +336,19 @@ private:
 
 };
 
+// Moonlit Nights: the spells that behave exactly like the hunter's Auto Shot (75): an auto-repeat ranged spell that is not cancelled by moving or by casting,
+// has no start delay and does not break other casts. 2040020 is the Warrior Skirmisher's Hurl (a clone of Auto Shot for thrown weapons). Add an id here for any further clone.
+constexpr uint32 MOONLIT_AUTO_SHOT_SPELLS[] = { 75, 2040020 };
+
+inline bool IsAutoShotSpell(uint32 spellId)
+{
+    for (uint32 id : MOONLIT_AUTO_SHOT_SPELLS)
+        if (id == spellId)
+            return true;
+
+    return false;
+}
+
 class AC_GAME_API SpellInfo
 {
 friend class SpellMgr;

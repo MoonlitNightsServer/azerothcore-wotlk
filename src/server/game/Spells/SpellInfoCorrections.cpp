@@ -4878,7 +4878,8 @@ void SpellMgr::LoadSpellInfoCorrections()
     });
 
     // Auto Shot
-    ApplySpellFix({ 75 }, [](SpellInfo* spellInfo)
+    // Moonlit Nights: 2040020 is Hurl, the Warrior Skirmisher's clone of Auto Shot (instant, not interruptible like it)
+    ApplySpellFix({ 75, 2040020 }, [](SpellInfo* spellInfo)
     {
         spellInfo->CastTimeEntry = sSpellCastTimesStore.LookupEntry(1); // 0s
         spellInfo->InterruptFlags &= ~SPELL_INTERRUPT_UNK;

@@ -3810,20 +3810,21 @@ void Unit::_UpdateAutoRepeatSpell()
         return;
     }
 
-    static uint32 const HUNTER_AUTOSHOOT = 75;
+    // Moonlit Nights: Auto Shot and its clones (Hurl) share the Auto Shot rules (IsAutoShotSpell in SpellInfo.h)
+    bool const isAutoShot = IsAutoShotSpell(spellProto->Id);
 
     // Check "realtime" interrupts
-    if ((IsPlayer() && ToPlayer()->isMoving() && spellProto->Id != HUNTER_AUTOSHOOT) || IsNonMeleeSpellCast(false, false, true, spellProto->Id == HUNTER_AUTOSHOOT))
+    if ((IsPlayer() && ToPlayer()->isMoving() && !isAutoShot) || IsNonMeleeSpellCast(false, false, true, isAutoShot))
     {
         // cancel wand shoot
-        if (spellProto->Id != HUNTER_AUTOSHOOT)
+        if (!isAutoShot)
             InterruptSpell(CURRENT_AUTOREPEAT_SPELL);
         m_AutoRepeatFirstCast = true;
         return;
     }
 
     // Apply delay (Hunter's autoshoot not affected)
-    if (m_AutoRepeatFirstCast && getAttackTimer(RANGED_ATTACK) < 500 && spellProto->Id != HUNTER_AUTOSHOOT)
+    if (m_AutoRepeatFirstCast && getAttackTimer(RANGED_ATTACK) < 500 && !isAutoShot)
     {
         setAttackTimer(RANGED_ATTACK, 500);
     }
@@ -3836,7 +3837,7 @@ void Unit::_UpdateAutoRepeatSpell()
         SpellCastResult result = m_currentSpells[CURRENT_AUTOREPEAT_SPELL]->CheckCast(true);
         if (result != SPELL_CAST_OK)
         {
-            if (spellProto->Id != HUNTER_AUTOSHOOT)
+            if (!isAutoShot)
             {
                 InterruptSpell(CURRENT_AUTOREPEAT_SPELL);
             }
@@ -3907,7 +3908,7 @@ void Unit::SetCurrentCastedSpell(Spell* pSpell)
                 if (m_currentSpells[CURRENT_AUTOREPEAT_SPELL])
                 {
                     // break autorepeat if not Auto Shot
-                    if (m_currentSpells[CURRENT_AUTOREPEAT_SPELL]->m_spellInfo->Id != 75)
+                    if (!IsAutoShotSpell(m_currentSpells[CURRENT_AUTOREPEAT_SPELL]->m_spellInfo->Id)) // Moonlit Nights: Auto Shot clones too
                         InterruptSpell(CURRENT_AUTOREPEAT_SPELL);
                     m_AutoRepeatFirstCast = true;
                 }
@@ -3937,7 +3938,7 @@ void Unit::SetCurrentCastedSpell(Spell* pSpell)
 
                 // it also does break autorepeat if not Auto Shot
                 if (m_currentSpells[CURRENT_AUTOREPEAT_SPELL] &&
-                        m_currentSpells[CURRENT_AUTOREPEAT_SPELL]->m_spellInfo->Id != 75)
+                        !IsAutoShotSpell(m_currentSpells[CURRENT_AUTOREPEAT_SPELL]->m_spellInfo->Id)) // Moonlit Nights: Auto Shot clones too
                     InterruptSpell(CURRENT_AUTOREPEAT_SPELL);
 
                 AddUnitState(UNIT_STATE_CASTING);
@@ -3947,7 +3948,7 @@ void Unit::SetCurrentCastedSpell(Spell* pSpell)
         case CURRENT_AUTOREPEAT_SPELL:
             {
                 // only Auto Shoot does not break anything
-                if (pSpell->m_spellInfo->Id != 75)
+                if (!IsAutoShotSpell(pSpell->m_spellInfo->Id)) // Moonlit Nights: Auto Shot clones too
                 {
                     // generic autorepeats break generic non-delayed and channeled non-delayed spells
                     if (Spell* s = GetCurrentSpell(CURRENT_CHANNELED_SPELL))
