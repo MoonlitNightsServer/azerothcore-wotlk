@@ -3843,7 +3843,9 @@ void Unit::_UpdateAutoRepeatSpell()
         SpellCastResult result = m_currentSpells[CURRENT_AUTOREPEAT_SPELL]->CheckCast(true);
         if (result != SPELL_CAST_OK)
         {
-            if (!isAutoShot)
+            // Moonlit Nights: a sheathed Death Knight shot must not stay current (and block the melee swing) once its target is gone, dead or the caster is mounted or has no weapon
+            if (!isAutoShot || (IsSheathedAutoShotSpell(spellProto->Id) &&
+                (result == SPELL_FAILED_BAD_TARGETS || result == SPELL_FAILED_TARGETS_DEAD || result == SPELL_FAILED_NOT_MOUNTED || result == SPELL_FAILED_EQUIPPED_ITEM_CLASS)))
             {
                 InterruptSpell(CURRENT_AUTOREPEAT_SPELL);
             }
