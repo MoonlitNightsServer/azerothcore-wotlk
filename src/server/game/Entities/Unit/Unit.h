@@ -2132,6 +2132,9 @@ protected:
     void _DeleteRemovedAuras();
 
     void _UpdateAutoRepeatSpell();
+public:
+    [[nodiscard]] bool HasSheathedAutoRepeat() const; // Moonlit Nights: see MOONLIT_SHEATHED_AUTO_SPELLS in SpellInfo.h
+protected:
 
     bool CanSparringWith(Unit const* attacker) const;   ///@brief: Check if unit is eligible for sparring damages. Work only if attacker and victim are creatures.
 

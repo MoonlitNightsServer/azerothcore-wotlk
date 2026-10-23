@@ -3797,6 +3797,12 @@ void Unit::_UpdateSpells(uint32 time)
     }
 }
 
+bool Unit::HasSheathedAutoRepeat() const
+{
+    Spell const* spell = m_currentSpells[CURRENT_AUTOREPEAT_SPELL];
+    return spell && IsSheathedAutoShotSpell(spell->m_spellInfo->Id);
+}
+
 void Unit::_UpdateAutoRepeatSpell()
 {
     SpellInfo const* spellProto = nullptr;
@@ -3848,6 +3854,13 @@ void Unit::_UpdateAutoRepeatSpell()
         // We want to shoot
         Spell* spell = new Spell(this, spellProto, TRIGGERED_FULL_MASK);
         spell->prepare(&(m_currentSpells[CURRENT_AUTOREPEAT_SPELL]->m_targets));
+
+        // Moonlit Nights: a sheathed Death Knight shot follows the main-hand swing speed and does not touch the melee timers
+        if (IsSheathedAutoShotSpell(spellProto->Id))
+        {
+            setAttackTimer(RANGED_ATTACK, int32(GetAttackTime(BASE_ATTACK) * m_modAttackSpeedPct[BASE_ATTACK]));
+            return;
+        }
 
         // Reset attack
         resetAttackTimer(RANGED_ATTACK);

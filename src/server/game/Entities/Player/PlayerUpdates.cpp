@@ -156,7 +156,7 @@ void Player::Update(uint32 p_time)
 
     m_achievementMgr->Update(p_time);
 
-    if (HasUnitState(UNIT_STATE_MELEE_ATTACKING) && !HasUnitState(UNIT_STATE_CASTING) && !HasUnitState(UNIT_STATE_CHARGING))
+    if (HasUnitState(UNIT_STATE_MELEE_ATTACKING) && !HasUnitState(UNIT_STATE_CASTING) && !HasUnitState(UNIT_STATE_CHARGING) && !HasSheathedAutoRepeat()) // Moonlit Nights: sheathed Death Knight shots replace the swing
     {
         if (Unit* victim = GetVictim())
         {

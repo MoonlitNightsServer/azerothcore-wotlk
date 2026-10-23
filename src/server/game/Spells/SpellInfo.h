@@ -340,13 +340,26 @@ private:
 // has no start delay and does not break other casts. 2040020 is the Warrior Skirmisher's Hurl (a clone of Auto Shot for thrown weapons). Add an id here for any further clone.
 constexpr uint32 MOONLIT_AUTO_SHOT_SPELLS[] = { 75, 2040020 };
 
+// Moonlit Nights: Auto Shot clones that need no ranged weapon: the Death Knight's weapon stays sheathed. 1120000 is the Frost Shardcaster's Icy Projectile, 1130121 the
+// Unholy Tomb Necromancer's Plague Slash. They follow the main-hand swing speed instead of the ranged timer, and replace the melee swing while they are the auto-repeat spell.
+constexpr uint32 MOONLIT_SHEATHED_AUTO_SPELLS[] = { 1120000, 1130121 };
+
+inline bool IsSheathedAutoShotSpell(uint32 spellId)
+{
+    for (uint32 id : MOONLIT_SHEATHED_AUTO_SPELLS)
+        if (id == spellId)
+            return true;
+
+    return false;
+}
+
 inline bool IsAutoShotSpell(uint32 spellId)
 {
     for (uint32 id : MOONLIT_AUTO_SHOT_SPELLS)
         if (id == spellId)
             return true;
 
-    return false;
+    return IsSheathedAutoShotSpell(spellId);
 }
 
 class AC_GAME_API SpellInfo
