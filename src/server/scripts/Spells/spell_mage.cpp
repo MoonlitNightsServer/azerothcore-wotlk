@@ -761,33 +761,8 @@ class spell_mage_ignite : public AuraScript
     }
 };
 
-// -44457 - Living Bomb
-class spell_mage_living_bomb : public AuraScript
-{
-    PrepareAuraScript(spell_mage_living_bomb);
-
-    bool Validate(SpellInfo const* spell) override
-    {
-        if (!sSpellMgr->GetSpellInfo(uint32(spell->Effects[EFFECT_1].CalcValue())))
-            return false;
-        return true;
-    }
-
-    void AfterRemove(AuraEffect const* aurEff, AuraEffectHandleModes /*mode*/)
-    {
-        AuraRemoveMode removeMode = GetTargetApplication()->GetRemoveMode();
-        if (removeMode != AURA_REMOVE_BY_ENEMY_SPELL && removeMode != AURA_REMOVE_BY_EXPIRE)
-            return;
-
-        if (Unit* caster = GetCaster())
-            caster->CastSpell(GetTarget(), uint32(aurEff->GetAmount()), true, nullptr, aurEff);
-    }
-
-    void Register() override
-    {
-        AfterEffectRemove += AuraEffectRemoveFn(spell_mage_living_bomb::AfterRemove, EFFECT_1, SPELL_AURA_DUMMY, AURA_EFFECT_HANDLE_REAL);
-    }
-};
+// Living Bomb (-44457) is handled by the mod-living-bomb module (spell_mage_living_bomb_mop), which replaces the stock script.
+// The stock script was removed here: it had no spell_script_names row, so every start logged "Script named spell_mage_living_bomb is not assigned in the database".
 
 // -1463 - Mana Shield
 class spell_mage_mana_shield : public spell_mage_incanters_absorbtion_base_AuraScript
@@ -1673,7 +1648,6 @@ void AddSC_mage_spell_scripts()
     RegisterSpellScript(spell_mage_fire_frost_ward);
     RegisterSpellScript(spell_mage_focus_magic);
     RegisterSpellScript(spell_mage_ignite);
-    RegisterSpellScript(spell_mage_living_bomb);
     RegisterSpellScript(spell_mage_mana_shield);
     RegisterSpellScript(spell_mage_master_of_elements);
     RegisterSpellScript(spell_mage_polymorph_cast_visual);
