@@ -3355,6 +3355,11 @@ SpellMissInfo Unit::MeleeSpellHitResult(Unit* victim, SpellInfo const* spellInfo
     if (spellInfo->HasAttribute(SPELL_ATTR3_ALWAYS_HIT))
         return SPELL_MISS_NONE;
 
+    // Moonlit Nights, Glyph of the Tomb Necromancer (cost: the strikes and the Plague Slash are spells): while the Favor aura 1130120 is on, a death knight's melee and ranged spells
+    // use the spell hit table (spell hit rating, level difference, resistances) instead of the melee one
+    if (spellInfo->SpellFamilyName == SPELLFAMILY_DEATHKNIGHT && HasAura(1130120))
+        return MagicSpellHitResult(victim, spellInfo);
+
     WeaponAttackType attType = BASE_ATTACK;
 
     // Check damage class instead of attack type to correctly handle judgements
