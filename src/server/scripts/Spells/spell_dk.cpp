@@ -1417,7 +1417,7 @@ class spell_dk_death_coil : public SpellScript
             if (!caster->IsFriendlyTo(target) && !caster->isInFront(target))
                 return SPELL_FAILED_UNIT_NOT_INFRONT;
 
-            if (target->IsFriendlyTo(caster) && target->GetCreatureType() != CREATURE_TYPE_UNDEAD && !caster->HasAura(49039)) // Moonlit Nights: Lichborne lets a death knight heal living allies
+            if (target->IsFriendlyTo(caster) && target->GetCreatureType() != CREATURE_TYPE_UNDEAD && !caster->HasAura(49039) && !caster->HasAura(1110130)) // Moonlit Nights: Lichborne and the Glyph of the Sanguine Mender (Favor aura 1110130) let a death knight heal living allies
                 return SPELL_FAILED_BAD_TARGETS;
         }
         else
