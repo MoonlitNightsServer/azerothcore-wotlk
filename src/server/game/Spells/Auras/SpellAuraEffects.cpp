@@ -1367,6 +1367,7 @@ void AuraEffect::HandleShapeshiftBoosts(Unit* target, bool apply) const
             HotWSpellId = 24899;
             break;
         case FORM_BATTLESTANCE:
+        case FORM_GLADIATORSTANCE:
             spellId = 21156;
             break;
         case FORM_DEFENSIVESTANCE:
@@ -1999,6 +2000,7 @@ void AuraEffect::HandleAuraModShapeshift(AuraApplication const* aurApp, uint8 mo
         case FORM_BATTLESTANCE:                             // 0x11
         case FORM_DEFENSIVESTANCE:                          // 0x12
         case FORM_BERSERKERSTANCE:                          // 0x13
+        case FORM_GLADIATORSTANCE:                          // 0x17
             PowerType = POWER_RAGE;
             break;
 
@@ -2172,6 +2174,7 @@ void AuraEffect::HandleAuraModShapeshift(AuraApplication const* aurApp, uint8 mo
             case FORM_BATTLESTANCE:
             case FORM_DEFENSIVESTANCE:
             case FORM_BERSERKERSTANCE:
+            case FORM_GLADIATORSTANCE:
                 {
                     uint32 Rage_val = 0;
                     // Defensive Tactics
